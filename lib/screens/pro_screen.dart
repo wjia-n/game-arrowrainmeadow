@@ -25,8 +25,10 @@ class _ProScreenState extends State<ProScreen> {
   Future<void> _buy(String productId) async {
     final resp = await InAppPurchase.instance.queryProductDetails({productId});
     if (resp.productDetails.isEmpty) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Product not available yet — coming soon!')));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Product not available yet — coming soon!')));
+      }
       return;
     }
     final param = PurchaseParam(productDetails: resp.productDetails.first);
@@ -56,7 +58,11 @@ class _ProScreenState extends State<ProScreen> {
         const SizedBox(height: 20),
         ElevatedButton.icon(icon: const Icon(Icons.share),
           label: const Text('Share this game'),
-          onPressed: () { widget.audio.click(); Share.share('Check out ${c.displayName}! ${c.tagline}'); }),
+          onPressed: () {
+            widget.audio.click();
+            SharePlus.instance.share(
+                ShareParams(text: 'Check out ${c.displayName}! ${c.tagline}'));
+          }),
         TextButton(onPressed: () => InAppReview.instance.openStoreListing(),
           child: const Text('Rate us ⭐', style: TextStyle(color: Colors.white70))),
       ]),

@@ -26,7 +26,7 @@ class _MenuScreenState extends State<MenuScreen> {
       body: Container(
         decoration: BoxDecoration(gradient: LinearGradient(
           begin: Alignment.topCenter, end: Alignment.bottomCenter,
-          colors: [config.darkColor, config.primaryColor.withOpacity(0.6)])),
+          colors: [config.darkColor, config.primaryColor.withValues(alpha: 0.6)])),
         child: SafeArea(child: Center(child: Padding(padding: const EdgeInsets.all(28), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(config.targetEmoji, style: const TextStyle(fontSize: 80)),
           const SizedBox(height: 8),

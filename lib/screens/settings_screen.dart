@@ -70,5 +70,5 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
   Widget _toggle(String label, bool value, ValueChanged<bool> onChanged) => SwitchListTile(
     title: Text(label, style: const TextStyle(color: Colors.white)),
-    value: value, onChanged: onChanged, activeColor: widget.config.accentColor);
+    value: value, onChanged: onChanged, activeThumbColor: widget.config.accentColor);
 }

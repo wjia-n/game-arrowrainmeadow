@@ -52,7 +52,7 @@ class _GameScreenState extends State<GameScreen> {
       ),
       body: AnimatedBuilder(
         animation: widget.engine,
-        builder: (_, __) {
+        builder: (_, _) {
           final e = widget.engine;
           if (e.gameOver) return _gameOver(c, e);
           return Column(children: [
@@ -80,7 +80,7 @@ class _GameScreenState extends State<GameScreen> {
 
   Widget _hud(GameConfig c, ShootEngine e) {
     return Container(
-      color: c.primaryColor.withOpacity(0.25),
+      color: c.primaryColor.withValues(alpha: 0.25),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
         _stat('SCORE', '${e.score}'),
@@ -119,7 +119,7 @@ class _PlayPainter extends CustomPainter {
   _PlayPainter({required this.engine, required this.config});
   @override void paint(Canvas canvas, Size size) {
     // background emoji pattern
-    final bgStyle = TextStyle(fontSize: 28, color: Colors.white.withOpacity(0.08));
+    final bgStyle = TextStyle(fontSize: 28, color: Colors.white.withValues(alpha: 0.08));
     final tp = TextPainter(textDirection: TextDirection.ltr);
     for (int i = 0; i < 12; i++) {
       tp.text = TextSpan(text: config.bgEmoji, style: bgStyle);
@@ -132,7 +132,7 @@ class _PlayPainter extends CustomPainter {
       final cx = t.x * size.width, cy = t.y * size.height;
       final emoji = t.isHazard ? config.hazardEmoji : config.targetEmoji;
       final color = t.isHazard ? Colors.red : t.kind == TargetKind.bonus ? config.accentColor : t.kind == TargetKind.fast ? Colors.orange : Colors.white;
-      canvas.drawCircle(Offset(cx, cy), r, Paint()..color = color.withOpacity(0.25));
+      canvas.drawCircle(Offset(cx, cy), r, Paint()..color = color.withValues(alpha: 0.25));
       final st = TextStyle(fontSize: r * 1.5);
       tp.text = TextSpan(text: emoji, style: st); tp.layout();
       tp.paint(canvas, Offset(cx - tp.width / 2, cy - tp.height / 2));
@@ -141,7 +141,7 @@ class _PlayPainter extends CustomPainter {
     for (final s in engine.shots) {
       final a = 1 - s.t / 0.25;
       canvas.drawCircle(Offset(s.x * size.width, s.y * size.height), 18 * a + 6,
-        Paint()..color = Colors.yellow.withOpacity(a * 0.8));
+        Paint()..color = Colors.yellow.withValues(alpha: a * 0.8));
     }
     if (engine.paused) {
       tp.text = const TextSpan(text: '⏸ PAUSED', style: TextStyle(fontSize: 32, color: Colors.white));

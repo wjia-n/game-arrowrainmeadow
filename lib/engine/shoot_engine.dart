@@ -70,7 +70,9 @@ class ShootEngine extends ChangeNotifier {
       if (out && !t.isHazard) { _miss(); }
       return out;
     });
-    for (final s in shots) s.t += dt;
+    for (final s in shots) {
+      s.t += dt;
+    }
     shots.removeWhere((s) => s.t > 0.25);
     notifyListeners();
   }
