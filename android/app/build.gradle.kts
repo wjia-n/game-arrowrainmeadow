@@ -77,5 +77,6 @@ flutter {
 configurations.all {
     resolutionStrategy {
         force("com.google.mlkit:barcode-scanning:17.3.0")
+        force("com.google.mlkit:vision-common:17.3.0")
     }
 }
